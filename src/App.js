@@ -33,14 +33,12 @@ import './default.scss';
 import Payment from './pages/payment';
 
 
-
 const App = props => {
   const dispatch = useDispatch();
   app.analytics();
   app.performance(); 
   const perf = app.performance(); 
   //const perf = getPerformance( app );
-  
 
   useEffect(() => {
     dispatch(checkUserSession());

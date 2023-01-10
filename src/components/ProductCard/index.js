@@ -64,12 +64,31 @@ const mapState = state => ({
       var test2 = test.slice( 0, 7 );
       var today = new Date(),
       date = ( today.getFullYear() ) + '-' + ( today.getMonth() + 1 ) + '-' + today.getDate();
-      var today = new Date(),
-        time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+      // var today = new Date(),
+      //   time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+      var today = new Date();
+      var preHours = today.getHours();
+      var preMin = today.getMinutes();
+      var preSec = today.getSeconds();
+      var time = preHours + ':' + preMin + ':' + preSec;
       var date2 = date.slice( 2, 9 );
       
-      analytics.logEvent( `${time}_${ test2 }:add_${date2}` );
+      var itemAddTime;
 
+      if ( localStorage.getItem( 'itemAddTime' ) != null )
+        itemAddTime = localStorage.getItem( 'itemAddTime' );
+      else
+      {
+        localStorage.setItem( 'itemAddTime', time );
+        localStorage.setItem( 'preHrs', preHours );
+        localStorage.setItem( 'preMin', preMin );
+        localStorage.setItem( 'preSec', preSec );
+        itemAddTime = localStorage.getItem( 'itemAddTime' );
+      }
+      
+      //analytics.logEvent( `test:${itemAddTime}` );
+      analytics.logEvent( `${time}_${ test2 }:add_${date2}` );
+      
       history.push('/cart');
     }
   

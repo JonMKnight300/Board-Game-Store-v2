@@ -28,7 +28,83 @@ const initialAddressState = {
 //   cartItems: selectCartItems,
 // });
 
-const PaymentDetails = () => {
+const PaymentDetails = () =>
+{
+  const history = useHistory();
+  var today = new Date();
+  var curHours = today.getHours();
+  var curMin = today.getMinutes();
+  var curSec = today.getSeconds();
+  var time = preHours + ':' + preMin + ':' + preSec;
+
+  var itemAddTime;
+  var preHours;
+  var preMin;
+  var preSec;
+
+if (localStorage.getItem( 'itemAddTime' ) !== null)
+{
+  itemAddTime = localStorage.getItem( 'itemAddTime' );
+  preHours = localStorage.getItem( 'preHrs' );
+  preMin = localStorage.getItem( 'preMin' );
+  preSec = localStorage.getItem( 'preSec' );
+//  analytics.logEvent( `WHATpre:${ preHours } / ${ preMin } / ${ preSec }` )
+//  analytics.logEvent( `WHATcur:${ curHours } / ${ curMin } / ${ curSec }` )
+}
+else
+  itemAddTime = 'fail';
+
+var lengthOfTime = 'Order2Close: ';
+
+  if ( itemAddTime != 'fail' )
+    var diffseconds;
+  var diffminutes;
+  var diffhours;
+
+    if (curSec >= preSec)
+      diffseconds = curSec - preSec;
+    else 
+    {
+      curMin = curMin - 1;
+      curSec = curSec + 60;
+      diffseconds = curSec - preSec;
+  }
+  
+  if ( curMin >= preMin )
+    diffminutes = curMin - preMin;
+  else
+  {
+    curHours = curHours - 1;
+    curMin = curMin + 60;
+    diffminutes = curMin - preMin;
+  }
+
+  diffhours = curHours - preHours;
+  
+  // analytics.logEvent( `WHATdiffpre: ${ preHours } / ${ preMin } / ${ preSec }` )
+  // analytics.logEvent(`WHATdiffcur: ${curHours} / ${curMin} / ${curSec}`)
+  // analytics.logEvent(`WHATdiff: ${diffhours} / ${diffminutes} / ${diffseconds}`)
+  if ( diffhours != 0 )
+    lengthOfTime = lengthOfTime + `${ diffhours } hour(s)`;
+  if ( diffminutes != 0 )
+    lengthOfTime = lengthOfTime + `${ diffminutes } min(s)`;
+  if ( diffseconds != 0 )
+    lengthOfTime = lengthOfTime + `${ diffseconds } sec(s)`;    
+
+
+  
+//analytics.logEvent( `WHATChkout cur:${time}` );
+//analytics.logEvent( `cur:${time} - ear:${ itemAddTime }` );
+//analytics.logEvent( `WHATChkout ear:${ itemAddTime }` );
+analytics.logEvent( `${ lengthOfTime }` );
+  localStorage.removeItem( 'itemAddTime' );
+  localStorage.removeItem( 'preHrs' );
+  localStorage.removeItem( 'PreMin' );  
+  localStorage.removeItem( 'preSec' );
+//itemAddTime = localStorage.getItem( 'itemAddTime' );
+//  analytics.logEvent( `testCheckRemove:${ itemAddTime }` );
+  
+  //history.push('/');
 //   const stripe = useStripe();
 //   const elements = useElements();
 //   const history = useHistory();

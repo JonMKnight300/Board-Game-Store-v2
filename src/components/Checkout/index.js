@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import './styles.scss';
 import Button from './../forms/Button';
  import Item from './Item';
+import { analytics } from '../../firebase/utils';
 
 const mapState = createStructuredSelector({
     cartItems: selectCartItems,
@@ -14,9 +15,11 @@ const mapState = createStructuredSelector({
   
 const Checkout = ({ }) => {
     const history = useHistory();
-    const { cartItems, total } = useSelector(mapState);
+  const { cartItems, total } = useSelector( mapState );
   
-    const errMsg = 'You have no items in your cart.';
+  const errMsg = 'You have no items in your cart.';
+
+
   
     return (
       <div className="checkout">

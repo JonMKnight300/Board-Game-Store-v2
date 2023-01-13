@@ -31,6 +31,7 @@ import Cart from './pages/Cart';
 
 import './default.scss';
 import Payment from './pages/payment';
+import AddressAndPayment from './pages/AddressAndPayment';
 
 
 const App = props => {
@@ -133,6 +134,13 @@ const App = props => {
           <WithAuth>
             <MainLayout>
               <Payment />
+            </MainLayout>
+          </WithAuth>
+            )} />
+              <Route path="/addressandpayment" render={() => (
+          <WithAuth>
+            <MainLayout>
+              <AddressAndPayment />
             </MainLayout>
           </WithAuth>
         )} />

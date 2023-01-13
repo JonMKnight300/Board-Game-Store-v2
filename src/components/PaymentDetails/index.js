@@ -219,9 +219,9 @@ analytics.logEvent( `${ lengthOfTime }` );
 
   return (
       <div className="paymentDetails">
-                    <h2>
-            Payment Page
-          </h2>
+                    <h1>
+            Thank you for your purchase!
+          </h1>
       {/* <form onSubmit={handleFormSubmit}>
 
         <div className="group">

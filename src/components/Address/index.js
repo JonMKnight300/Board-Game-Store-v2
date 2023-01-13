@@ -1,11 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectCartItems, selectCartTotal } from './../../redux/Cart/cart.selectors';
+import { selectCartItems, selectCartTotal } from '../../redux/Cart/cart.selectors';
 import { createStructuredSelector } from 'reselect';
 import './styles.scss';
-import Button from './../forms/Button';
- import Item from './Item';
+import Button from '../forms/Button';
 import { analytics } from '../../firebase/utils';
 
 const mapState = createStructuredSelector({
@@ -13,22 +11,20 @@ const mapState = createStructuredSelector({
     total: selectCartTotal
 } );
   
-const Checkout = ({ }) => {
+const Address = ({ }) => {
     const history = useHistory();
-  const { cartItems, total } = useSelector( mapState );
-  
-  const errMsg = 'You have no items in your cart.';
+
 
 
   
     return (
-      <div className="checkout">
+      <div className="addressandpayment">
         <h1>
           Checkout
         </h1>
   
-        <div className="cart">
-          {cartItems.length > 0 ? (
+        <div className="address">
+
             <table border="0" cellPadding="0" cellSpacing="0">
               <tbody>
                 <tr>
@@ -37,19 +33,19 @@ const Checkout = ({ }) => {
                       <tbody>
                         <tr>
                           <th>
-                            Product
+                            Enter your address:
                           </th>
                           <th>
-                            Description
+                            Name
                           </th>
                           <th>
-                            Quantity
+                            Address
                           </th>
                           <th>
-                            Price
+                            City
                           </th>
                           <th>
-                            Remove
+                            Zip
                           </th>
                         </tr>
                       </tbody>
@@ -60,15 +56,7 @@ const Checkout = ({ }) => {
                   <td>
                     <table border="0" cellSpacing="0" cellPadding="0">
                       <tbody>
-                        {cartItems.map((item, pos) => {
-                          return (
-                            <tr key={pos}>
-                              <td>
-                                <Item {...item} />
-                              </td>
-                            </tr>
-                          );
-                        })}
+
                       </tbody>
                     </table>
                   </td>
@@ -84,7 +72,7 @@ const Checkout = ({ }) => {
                                 <tr>
                                   <td>
                                   <h3>
-                                    Total: ${total}
+                                    Enter Credit Card Info
                                   </h3>
                                   </td>
                                 </tr>
@@ -98,13 +86,8 @@ const Checkout = ({ }) => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <Button onClick={() => history.goBack()}>
-                                      Continue Shopping
-                                    </Button>
-                                  </td>
-                                  <td>
-                                    <Button onClick={() => history.push('/addressandpayment')}>
-                                      Checkout
+                                    <Button onClick={() => history.push('/payment')}>
+                                      Pay For Items
                                     </Button>
                                   </td>
                                 </tr>
@@ -118,14 +101,10 @@ const Checkout = ({ }) => {
                 </tr>
               </tbody>
             </table>
-          ) : (
-              <p>
-                {errMsg}
-              </p>
-            )}
+
         </div>
       </div>
     );
   };
   
-  export default Checkout;
+  export default Address;

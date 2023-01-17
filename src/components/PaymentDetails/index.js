@@ -22,6 +22,20 @@ const initialAddressState = {
   country: '',
 };
 
+// function delay(time) {
+//   return new Promise(resolve => setTimeout(resolve, time));
+// };
+
+// async function test()
+// {
+
+//   //console.log('start timer');
+//   await delay(1000);
+//  // console.log( 'after 1 second' );
+
+// }
+
+
 // const mapState = createStructuredSelector({
 //   total: selectCartTotal,
 //   itemCount: selectCartItemsCount,
@@ -103,8 +117,9 @@ analytics.logEvent( `${ lengthOfTime }` );
   localStorage.removeItem( 'preSec' );
 //itemAddTime = localStorage.getItem( 'itemAddTime' );
 //  analytics.logEvent( `testCheckRemove:${ itemAddTime }` );
-  
-  //history.push('/');
+  //test();
+  setTimeout(() => {  history.push('/'); }, 5000);
+
 //   const stripe = useStripe();
 //   const elements = useElements();
 //   const history = useHistory();
